@@ -5,6 +5,13 @@ lxml changelog
 5.3.0 (2024-??-??)
 ==================
 
+Features added
+--------------
+
+* GH#421: Nested ``CDATA`` sections are no longer rejected but split on output
+  to represent ``]]>`` correctly.
+  Patch by Gertjan Klein.
+
 Bugs fixed
 ----------
 
@@ -13,10 +20,10 @@ Bugs fixed
 Other changes
 -------------
 
-* LP#2059794: The ``tests`` packages were moved out of the ``lxml`` package into a separate directory.
+* LP#2067707: The ``strip_cdata`` option in ``HTMLParser()`` turned out to be useless and is now deprecated.
 
 
-5.2.2 (2024-??-??)
+5.2.2 (2024-05-12)
 ==================
 
 Bugs fixed
@@ -24,6 +31,11 @@ Bugs fixed
 
 * GH#417: The ``test_feed_parser`` test could fail if ``lxml_html_clean`` was not installed.
   It is now skipped in that case.
+
+* LP#2059910: The minimum CPU architecture for the Linux x86 binary wheels was set back to
+  "core2", without SSE 4.2.
+
+* If libxml2 uses iconv, the compile time version is available as `etree.ICONV_COMPILED_VERSION`.
 
 
 5.2.1 (2024-04-02)

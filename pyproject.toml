@@ -3,17 +3,15 @@ requires = ["Cython>=3.0.10", "setuptools", "wheel"]
 
 [tool.cibuildwheel]
 build-verbosity = 2
-environment = {STATIC_DEPS="true", LIBXML2_VERSION = "2.12.6", LIBXSLT_VERSION = "1.1.39"}
+environment = {STATIC_DEPS="true", LIBXML2_VERSION = "2.12.7", LIBXSLT_VERSION = "1.1.39"}
 skip = [
     "pp*-manylinux_i686",
     "*-musllinux_i686",
     # Py3.8 wheel for macos is not universal: https://bugs.launchpad.net/lxml/+bug/2055404
-    "cp38_macosx_universal2",
+    "cp38-macosx_universal2",
     # Reduce job load and HTTP hit rate on library servers.
     "cp36-manylinux_aarch64",
-    "cp37-manylinux_aarch64",
     "cp36-musllinux_aarch64",
-    "cp37-musllinux_aarch64",
     "cp36-manylinux_ppc64le",
     "cp37-manylinux_ppc64le",
     "cp38-manylinux_ppc64le",
@@ -27,7 +25,7 @@ skip = [
     "cp37-musllinux_s390x",
     "cp38-musllinux_s390x",
 ]
-# test-command = "python {package}/test.py -p -v"
+test-command = "python {package}/test.py -vv"
 
 [tool.cibuildwheel.linux]
 archs = ["x86_64", "aarch64", "i686", "ppc64le", "s390x"]
@@ -40,7 +38,7 @@ NM = "gcc-nm"
 RANLIB = "gcc-ranlib"
 LDFLAGS = "-fPIC -flto"
 STATIC_DEPS = "true"
-LIBXML2_VERSION = "2.12.6"
+LIBXML2_VERSION = "2.12.7"
 LIBXSLT_VERSION = "1.1.39"
 
 [[tool.cibuildwheel.overrides]]
@@ -51,7 +49,7 @@ environment.CFLAGS = "-O3 -g1 -pipe -fPIC -flto -march=core2 -mtune=generic"
 [[tool.cibuildwheel.overrides]]
 select = "*linux_x86_64"
 inherit.environment = "append"
-environment.CFLAGS = "-O3 -g1 -pipe -fPIC -flto -march=core2 -msse4.1 -msse4.2 -mtune=generic"
+environment.CFLAGS = "-O3 -g1 -pipe -fPIC -flto -march=core2 -mtune=generic"
 
 [[tool.cibuildwheel.overrides]]
 select = "*aarch64"
